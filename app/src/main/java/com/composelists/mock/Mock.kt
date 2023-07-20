@@ -2,6 +2,7 @@ package com.composelists.mock
 
 import com.composelists.model.Category
 import com.composelists.model.Subcategory
+import com.composelists.model.User
 
 val categories = listOf(
     Category(
@@ -78,4 +79,17 @@ val categories = listOf(
             Subcategory(35, "NinthSub4")
         )
     )
+)
+
+val users = listOf(
+    User(0, "Petya"),
+    User(1, "Vasya"),
+    User(2, "Vika"),
+    User(3, "Sergey"),
+    User(4, "Ivan"),
+    User(5, "Mikhail"),
+    User(6, "Dima"),
+    User(7, "Masha"),
+    User(8, "Ilya"),
+    User(9, "Nastya")
 )
