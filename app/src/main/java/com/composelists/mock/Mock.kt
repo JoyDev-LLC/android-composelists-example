@@ -1,5 +1,7 @@
 package com.composelists.mock
 
+import android.net.Uri
+import androidx.compose.ui.input.key.Key.Companion.U
 import com.composelists.model.Category
 import com.composelists.model.Subcategory
 import com.composelists.model.User
@@ -82,14 +84,22 @@ val categories = listOf(
 )
 
 val users = listOf(
-    User(0, "Petya"),
-    User(1, "Vasya"),
-    User(2, "Vika"),
-    User(3, "Sergey"),
-    User(4, "Ivan"),
-    User(5, "Mikhail"),
-    User(6, "Dima"),
-    User(7, "Masha"),
-    User(8, "Ilya"),
-    User(9, "Nastya")
+    User(0, "1"),
+    User(1, "2"),
+    User(2, "3"),
+    User(3, "4"),
+    User(4, "5"),
+    User(5, "6"),
+    User(6, "7"),
+    User(7, "8"),
+    User(8, "9"),
+    User(9, "1"),
+    User(10, "2"),
+    User(11, "3"),
+    User(12, "4"),
+    User(13, "5"),
+    User(14, "6"),
+    User(15, "7"),
+    User(16, "8"),
+    User(17, "9")
 )

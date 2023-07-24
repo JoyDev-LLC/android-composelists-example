@@ -15,8 +15,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposelistsTheme {
-                //SimpleRowScreen(users)
-                //SimpleColumnScreen(users)
+                /*SimpleRowScreen(users)
+                SimpleColumnScreen(users)*/
                 SimpleLazyColumnScreen()
             }
         }
