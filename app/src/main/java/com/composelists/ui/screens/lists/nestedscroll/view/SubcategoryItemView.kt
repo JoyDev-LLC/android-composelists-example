@@ -33,8 +33,7 @@ fun SubcategoryItemView(subcategory: Subcategory, modifier: Modifier = Modifier)
         colors = CardDefaults.cardColors(containerColor = Color.White),
         onClick = {}
     ) {
-        val pagerState = rememberPagerState(pageCount = { 3 })
-        HorizontalPager(state = pagerState) { page ->
+        HorizontalPager(3) { page ->
             Text(
                 modifier = Modifier.padding(10.dp),
                 text = subcategory.name + "$page",
