@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.composelists.mock.users
+import com.composelists.ui.screens.lists.simple_lists.ExpandedLazyColumnScreen
 import com.composelists.ui.screens.lists.simple_lists.ScrollableLazyList
 import com.composelists.ui.screens.lists.simple_lists.SimpleLazyColumnScreen
 import com.composelists.ui.theme.ComposelistsTheme
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
             ComposelistsTheme {
                 /*SimpleRowScreen(users)
                 SimpleColumnScreen(users)*/
-                SimpleLazyColumnScreen()
+                ExpandedLazyColumnScreen()
             }
         }
     }

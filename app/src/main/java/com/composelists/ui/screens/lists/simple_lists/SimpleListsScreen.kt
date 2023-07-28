@@ -1,12 +1,5 @@
 package com.composelists.ui.screens.lists.simple_lists
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentScope.SlideDirection
-import androidx.compose.animation.AnimatedContentScope.SlideDirection.Companion
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.with
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -37,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import com.composelists.mock.users
 import com.composelists.model.User
 import com.composelists.ui.screens.lists.simple_lists.view.PersonView
+import kotlin.random.Random
 
 @Composable
 fun SimpleColumnScreen(users: List<User>) {
@@ -46,7 +40,7 @@ fun SimpleColumnScreen(users: List<User>) {
             .verticalScroll(state = rememberScrollState())
     ) {
         users.forEach { user ->
-            PersonView(name = user.name, Modifier)
+            PersonView(name = user.name, modifier = Modifier)
         }
     }
 }
@@ -59,7 +53,7 @@ fun SimpleRowScreen(users: List<User>) {
             .horizontalScroll(state = rememberScrollState())
     ) {
         users.forEach { user ->
-            PersonView(name = user.name, Modifier)
+            PersonView(name = user.name, modifier = Modifier)
         }
     }
 }
@@ -111,7 +105,7 @@ fun ScrollableLazyList(users: List<User>) {
     Box {
         LazyColumn(state = listState) {
             items(users, key = { user -> user.id }) { user ->
-                PersonView(name = user.name, Modifier)
+                PersonView(name = user.name, modifier = Modifier)
             }
         }
         LaunchedEffect(listState.layoutInfo) {
@@ -122,22 +116,19 @@ fun ScrollableLazyList(users: List<User>) {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SimpleLazyColumnScreen() {
     var users by remember { mutableStateOf(users) }
     Box {
         LazyColumn {
             items(users, key = { user -> user.id }) { user ->
-                AnimatedContent(targetState = user, transitionSpec = {
-                    slideIntoContainer(SlideDirection.Left) with slideOutOfContainer(Companion.Right)
-                }) {
-                    PersonView(
-                        name = user.name, Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
-                    )
-                }
+                PersonView(
+                    name = user.name, modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .animateItemPlacement()
+                )
             }
         }
         Row(
@@ -146,7 +137,7 @@ fun SimpleLazyColumnScreen() {
             horizontalArrangement = Arrangement.Center
         ) {
             Button(onClick = {
-                users = users.toMutableList().also { it.add(3, User(123, "123")) }
+                users = users.toMutableList().also { it.add(3, User(Random.nextInt(), "New item")) }
             }) {
                 Text(text = "Add")
             }
@@ -155,6 +146,27 @@ fun SimpleLazyColumnScreen() {
             }
             Button(onClick = { users = users.shuffled() }) {
                 Text(text = "Shuffle")
+            }
+        }
+    }
+}
+
+@Composable
+fun ExpandedLazyColumnScreen() {
+    val users by remember { mutableStateOf(users) }
+    var clickedItemId by remember { mutableStateOf(Int.MIN_VALUE) }
+    Box {
+        LazyColumn {
+            items(users, key = { user -> user.id }) { user ->
+                PersonView(
+                    id = user.id,
+                    name = user.name,
+                    onItemClick = { id -> clickedItemId = if (clickedItemId == id) Int.MIN_VALUE else id },
+                    showAdditionalText = clickedItemId == user.id,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                )
             }
         }
     }
@@ -174,7 +186,7 @@ fun SimpleLazyColumnScreen() {
 fun SimpleLazyRowScreen() {
     LazyRow(modifier = Modifier.fillMaxSize()) {
         items(10000) { value ->
-            PersonView(name = value.toString(), Modifier)
+            PersonView(name = value.toString(), modifier = Modifier)
         }
     }
 }
