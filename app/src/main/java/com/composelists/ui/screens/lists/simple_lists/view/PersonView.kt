@@ -1,5 +1,6 @@
 package com.composelists.ui.screens.lists.simple_lists.view
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,15 +22,13 @@ import androidx.compose.ui.unit.sp
 @Preview
 @Composable
 fun PersonViewPreview() {
-    PersonView(name = "Hello")
+    PersonView(name = "Hello", Modifier)
 }
 
 @Composable
-fun PersonView(name: String) {
+fun PersonView(name: String, modifier: Modifier) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
+        modifier = modifier
     ) {
         Row(
             modifier = Modifier
